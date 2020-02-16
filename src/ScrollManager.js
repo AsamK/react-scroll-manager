@@ -48,7 +48,9 @@ export class ScrollManager extends React.Component {
       }
     });
 
+    this._historyChanged = true;
     this._unlisten = history.listen((location, action) => {
+      this._historyChanged = true;
       this._savePositions();
 
       // cancel any pending hash scroller
@@ -153,6 +155,7 @@ export class ScrollManager extends React.Component {
   }
 
   _restoreNode(scrollKey) {
+    this._historyChanged = false;
     const position = this._loadPosition(scrollKey);
     const { scrollLeft = 0, scrollTop = 0 } = position || {};
     debug('restore', this._locationKey, scrollKey, scrollLeft, scrollTop);
@@ -183,6 +186,7 @@ export class ScrollManager extends React.Component {
   }
 
   _restoreWindow() {
+    this._historyChanged = false;
     const scrollKey = 'window';
     const position = this._loadPosition(scrollKey);
     const { scrollX = 0, scrollY = 0 } = position || {};

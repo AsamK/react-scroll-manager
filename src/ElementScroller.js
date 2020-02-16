@@ -17,6 +17,11 @@ class ManagedElementScroller extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { manager } = this.props;
+    if (!manager._historyChanged) {
+      return;
+    }
+
     this._unregister(prevProps);
     this._register();
   }
