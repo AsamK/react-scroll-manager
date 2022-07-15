@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import timedMutationObserver from './timedMutationObserver';
+import debugFn from 'debug';
 
-const debug = require('debug')('ScrollManager');
+const debug = debugFn('ScrollManager');
 
 const ManagerContext = React.createContext();
 
